@@ -1,7 +1,9 @@
-# NN4Function
+# NN4Function - Approach a function with a Neuronal Network
 
 The purpose of this repository is to play with a multidimensional function
 and approximate it with a (simple) Neural Network
+
+
 
 ##  MyFunctionData class (C01_function_data.py)
 
@@ -160,33 +162,19 @@ config = {
 }
 ```    
 
-
 `f=(sin(x0)+sin(2·x1)/2+sin(4·x2)/4)·x3`
-
 ![](https://raw.githubusercontent.com/miguelknals/NN4Function/master/images/Example1.png)
 
 `f=(x0^2 + 2·x1^2)·(1+x2) + (1+x3^2)`
-
 ![](https://raw.githubusercontent.com/miguelknals/NN4Function/master/images/Example2.png)
 
 
+##  Environment
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```conda create --name NN4Function python=3.9
+conda install -c conda-forge matplotlib
+conda install pytorch torchvision torchaudio cpuonly -c pytorch # (win 10 no cpu)
+conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch ```
 
 
 (C) 2022 miguel canals (http://www.mknals.com) MIT License 

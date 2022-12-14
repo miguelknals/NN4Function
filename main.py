@@ -155,8 +155,8 @@ def display_model_results(tr_losses, va_losses, te_losses):
     plt.plot(va_losses, label='validation')
     plt.plot(te_losses, label='test')
     plt.legend(loc="upper right")
-    #plt.show()
-    plt.savefig("dummy_name.png")
+    plt.show()
+    #plt.savefig("dummy_name.png")
     return
 
 
