@@ -91,8 +91,11 @@ def train_model(config):
     lr=config["learning_rate"]
     epochs=config["epochs"]
     
+    # we generate dataset from the MyFunctionData class 
+    # that will generate a filenmae with the data
     MyFunctionData(filename,nvalues) # temporary filename and number of points
     
+    # we create the datset based on the previous filename
     my_dataset = MyDataset(filename=filename) # my dataset using the custom dataset
 
     len_my_dataset= my_dataset.__len__() 
@@ -107,7 +110,7 @@ def train_model(config):
     validation_dataloader = DataLoader(validation_dataset, batch_size=batch_size, shuffle=True)
     test_dataloader =DataLoader(test_dataset, batch_size=batch_size)     
 
-
+    # Model creation and loss and optimization criteria
     network = MyModel(n_features, n_hidden, n_outputs).to(device) # we create the model
     criterion = nn.MSELoss() # loss function is mean squared error (squared L2 norm) 
     #optimizer = optim.SGD(network.parameters(), lr=lr) # Stochastic Gradien Descent
@@ -152,8 +155,8 @@ def display_model_results(tr_losses, va_losses, te_losses):
     plt.plot(va_losses, label='validation')
     plt.plot(te_losses, label='test')
     plt.legend(loc="upper right")
-    plt.show()
-    #plt.savefig("dummy_name.png")
+    #plt.show()
+    plt.savefig("dummy_name.png")
     return
 
 

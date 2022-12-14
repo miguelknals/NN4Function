@@ -71,7 +71,10 @@ these dataset we create te dataloaders.
 ```
 # Model creation and loss and optimization criteria
 network = MyModel(n_features, n_hidden, n_outputs).to(device) # we create the model
-criterion = nn.MSELoss() # loss function is mean squared error (squared optimizer = optim.Adam(network.parameters(), lr=lr) # Adam in general works better.
+# loss function is mean squared error (squared 
+criterion = nn.MSELoss() 
+# Adam in general works better than SGD.
+optimizer = optim.Adam(network.parameters(), lr=lr) 
 ```
 
 Then the main loop:
@@ -79,14 +82,18 @@ Then the main loop:
 ```
 for epoch in range(epochs):
         print(f"Epoch {epoch+1}/{epochs}")
-        avg_loss= train_single_epoch(epoch, train_dataloader, network, optimizer, criterion, device )
-        
-        validation_loss = eval_single_epoch(epoch, validation_dataloader, network, criterion, device,"Validation" )
-        test_loss = eval_single_epoch(epoch, test_dataloader, network, criterion, device, "Test      " )    
-        tr_losses.append(avg_loss); va_losses.append(validation_loss); te_losses.append(test_loss)
+        avg_loss= train_single_epoch(epoch, train_dataloader, 
+                    network, optimizer, criterion, device )        
+        validation_loss = eval_single_epoch(epoch, validation_dataloader,
+                    network, criterion, device,"Validation" )
+        test_loss = eval_single_epoch(epoch, test_dataloader, 
+                    network, criterion, device, "Test      " )    
+        tr_losses.append(avg_loss); 
+        va_losses.append(validation_loss); 
+        te_losses.append(test_loss)
 ```
 
-##### `train_single_epoch`
+##### train_single_epoch
 
 Main loop. Evaluates batches, loss and logs the lossess.
 
@@ -115,7 +122,7 @@ Main loop. Evaluates batches, loss and logs the lossess.
             epoch, loss.item(), avg_loss))
 ```
 
-##### `eval_single_epoch`
+##### eval_single_epoch
 
 Similar to `train_single_epoch` but just evaluation
 
@@ -138,8 +145,32 @@ Similar to `train_single_epoch` but just evaluation
             verification_loss ))
 ```
 
+## Examples 
 
-   
+```
+config = {
+    "dataset_filename": "tmp.txt", # file to store function dataset
+    "n_values": 5000, # number of points to be generated on the dataset
+    "epochs":50,           # for training
+    "learning_rate": 1e-2, # for training
+    "n_features":4,        # number of input features
+    "n_hidden":10,         # number of hidden nodes in intermediate layers
+    "n_outputs":1,         # number of output features 
+    "batch_size": 64        
+}
+```    
+
+
+`f=(sin(x0)+sin(2·x1)/2+sin(4·x2)/4)·x3`
+
+![](https://raw.githubusercontent.com/miguelknals/NN4Function/master/images/Example1.png)
+
+`f=(x0^2 + 2·x1^2)·(1+x2) + (1+x3^2)`
+
+![](https://raw.githubusercontent.com/miguelknals/NN4Function/master/images/Example2.png)
+
+
+
 
 
 
